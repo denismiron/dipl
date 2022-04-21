@@ -14,9 +14,9 @@
 //   id: number;
 //   @Column({ type: DataType.STRING, allowNull: false})
 //   name: string;
-//   @Column({ type: DataType.STRING, allowNull: true})
+//   @Column({ type: DataType.STRING, allowNull: false})
 //   description: string;
-//   @Column({ type: DataType.STRING, allowNull: true})
+//   @Column({ type: DataType.STRING, allowNull: false})
 //   price: string;
 //   @Column({ type: DataType.STRING, allowNull: false})
 //   weight: string;
