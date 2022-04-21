@@ -3,10 +3,14 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from "@nestjs/config";
 import { User } from "./users/users.model";
+import { NewsModule } from './news/news.module';
+import { DishesService } from './dishes/dishes.service';
+import { DishesController } from './dishes/dishes.controller';
+import { DishesModule } from './dishes/dishes.module';
 
 @Module({
-  controllers:[],
-  providers:[],
+  controllers:[DishesController],
+  providers:[DishesService],
   imports:[
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
@@ -20,7 +24,7 @@ import { User } from "./users/users.model";
     database: process.env.POSTGRES_DB,
     models: [User],
     autoLoadModels: true
-  }), UsersModule,]
+  }), UsersModule, NewsModule, DishesModule,]
 })
 export class AppModule{
 
