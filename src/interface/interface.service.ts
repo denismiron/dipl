@@ -19,3 +19,4 @@ export class InterfaceService {
     return inter;
   }
 }
+

@@ -5,6 +5,7 @@ import { ConfigModule } from "@nestjs/config";
 import { User } from "./users/users.model";
 import { NewsModule } from './news/news.module';
 import {InterfaceModule} from "./interface/interface.module";
+import {DishesModule} from "./dishes/dishes.module";
 
 @Module({
   controllers:[],
@@ -22,7 +23,7 @@ import {InterfaceModule} from "./interface/interface.module";
     database: process.env.POSTGRES_DB,
     models: [User],
     autoLoadModels: true
-  }), UsersModule, NewsModule, InterfaceModule]
+  }), UsersModule, NewsModule, InterfaceModule,DishesModule]
 })
 export class AppModule{
 
