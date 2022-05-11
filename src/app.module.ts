@@ -4,13 +4,11 @@ import { UsersModule } from './users/users.module';
 import { ConfigModule } from "@nestjs/config";
 import { User } from "./users/users.model";
 import { NewsModule } from './news/news.module';
-import { DishesService } from './dishes/dishes.service';
-import { DishesController } from './dishes/dishes.controller';
-import { DishesModule } from './dishes/dishes.module';
+import {InterfaceModule} from "./interface/interface.module";
 
 @Module({
-  controllers:[DishesController],
-  providers:[DishesService],
+  controllers:[],
+  providers:[],
   imports:[
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
@@ -24,7 +22,7 @@ import { DishesModule } from './dishes/dishes.module';
     database: process.env.POSTGRES_DB,
     models: [User],
     autoLoadModels: true
-  }), UsersModule, NewsModule, DishesModule,]
+  }), UsersModule, NewsModule, InterfaceModule]
 })
 export class AppModule{
 
