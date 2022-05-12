@@ -3,6 +3,8 @@ interface DishCreationAttrs{
   name: string;
   weight: string;
   imageRef: string;
+  price: string;
+  description: string;
  }
 
  @Table({tableName: 'dishes'})
@@ -11,8 +13,12 @@ interface DishCreationAttrs{
    id: number;
    @Column({ type: DataType.STRING, allowNull: false})
    name: string;
-   @Column({ type: DataType.STRING, allowNull: false})
+   @Column({ type: DataType.STRING, allowNull: true})
    weight: string;
    @Column({ type: DataType.STRING, allowNull: true})
+   price: string;
+   @Column({ type: DataType.STRING, allowNull: true})
    imageRef: string;
+   @Column({ type: DataType.STRING, allowNull: true})
+   description: string;
  }
