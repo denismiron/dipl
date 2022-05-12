@@ -6,6 +6,8 @@ import { User } from "./users/users.model";
 import { NewsModule } from './news/news.module';
 import {InterfaceModule} from "./interface/interface.module";
 import {DishesModule} from "./dishes/dishes.module";
+import { CompaniesModule } from "./companies/companies.module";
+import { CategoriesModule } from "./categories/categories.module";
 
 @Module({
   controllers:[],
@@ -23,7 +25,7 @@ import {DishesModule} from "./dishes/dishes.module";
     database: process.env.POSTGRES_DB,
     models: [User],
     autoLoadModels: true
-  }), UsersModule, NewsModule, InterfaceModule,DishesModule]
+  }), UsersModule, NewsModule, InterfaceModule,DishesModule,CompaniesModule,CategoriesModule]
 })
 export class AppModule{
 
