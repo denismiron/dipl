@@ -3,6 +3,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Dish } from "./diches.model";
 import { CreateDishDto } from "./dto/create-dish.dto";
 
+
 @Injectable()
 export class DishesService {
   constructor(@InjectModel(Dish) private dishRepository: typeof Dish) {
@@ -14,8 +15,8 @@ export class DishesService {
     return dish;
   }
 
-  async getAllDishes() {
-    const dishes = await this.dishRepository.findAll();
+  async getDishById(categoryId: number) {
+    const dishes = await this.dishRepository.findAll({where: {categoryId}});
     return dishes;
   }
 }

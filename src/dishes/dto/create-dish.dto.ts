@@ -4,4 +4,5 @@ export class CreateDishDto{
   readonly imageRef: string;
   readonly price: string;
   readonly description: string;
+  readonly categoryId: number;
 }
