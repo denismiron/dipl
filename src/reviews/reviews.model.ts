@@ -1,13 +1,13 @@
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
-interface UserCreationAttrs{
+interface ReviewCreationAttrs{
   phone: string;
   message: string;
   name: string;
 }
 
-@Table({tableName: 'users'})
-export class User extends Model<User, UserCreationAttrs>{
+@Table({tableName: 'reviews'})
+export class Review extends Model<Review, ReviewCreationAttrs>{
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
   @Column({ type: DataType.STRING, unique: true, allowNull: false})

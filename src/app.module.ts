@@ -1,11 +1,16 @@
 import { Module } from "@nestjs/common";
 import { SequelizeModule } from "@nestjs/sequelize";
-import { UsersModule } from './users/users.module';
 import { ConfigModule } from "@nestjs/config";
-import { User } from "./users/users.model";
-import { NewsModule } from './news/news.module';
-import {InterfaceModule} from "./interface/interface.module";
-import {DishesModule} from "./dishes/dishes.module";
+import { Review } from "./reviews/reviews.model";
+import {Interface} from "./interface/interface.model";
+import {News} from "./news/news.model";
+import { Company } from "./companies/companies.model";
+import { Categories } from "./categories/categories.model";
+import { Dish } from "./dishes/diches.model";
+import { NewsModule } from "./news/news.module";
+import { ReviewsModule } from "./reviews/reviews.module";
+import { InterfaceModule } from "./interface/interface.module";
+import { DishesModule } from "./dishes/dishes.module";
 import { CompaniesModule } from "./companies/companies.module";
 import { CategoriesModule } from "./categories/categories.module";
 
@@ -23,9 +28,16 @@ import { CategoriesModule } from "./categories/categories.module";
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
-    models: [User],
+    models: [Review, News, Interface, Dish, Company, Categories],
     autoLoadModels: true
-  }), UsersModule, NewsModule, InterfaceModule,DishesModule,CompaniesModule,CategoriesModule]
+  }),
+    ReviewsModule,
+    NewsModule,
+    InterfaceModule,
+    DishesModule,
+    CompaniesModule,
+    CategoriesModule
+  ]
 })
 export class AppModule{
 
