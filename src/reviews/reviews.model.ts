@@ -3,6 +3,7 @@ import { Column, DataType, Model, Table } from "sequelize-typescript";
 interface ReviewCreationAttrs{
   phone: string;
   message: string;
+  adminMessage: string;
   name: string;
 }
 
@@ -14,6 +15,8 @@ export class Review extends Model<Review, ReviewCreationAttrs>{
   phone: string;
   @Column({ type: DataType.STRING, allowNull: false})
   message: string;
+  @Column({ type: DataType.STRING, allowNull: true})
+  adminMessage: string;
   @Column({ type: DataType.STRING, allowNull: false})
   name: string;
 }
