@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { CreateNewsDto } from "../news/dto/create-news.dto";
 import { NewsService } from "./news.service";
 
@@ -15,5 +15,10 @@ export class NewsController {
   @Post()
   create(@Body() newsDto: CreateNewsDto) {
     return this.newsService.createNews(newsDto);
+  }
+
+  @Delete('/:id')
+  deleteOneDish(@Param('id') id: number) {
+    return { id: this.newsService.deleteOneNews(id) };
   }
 }

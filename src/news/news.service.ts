@@ -16,4 +16,11 @@ export class NewsService {
     const news = await this.newsRepository.findAll();
     return news;
   }
+  async deleteOneNews(id:number){
+    const newsToDelete = await this.newsRepository.findOne({
+      where:{id:id},
+    });
+    await this.newsRepository.destroy({where:{id}});
+    return newsToDelete.id;
+  }
 }

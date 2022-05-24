@@ -22,7 +22,11 @@ export class DishesService {
     const dishes = await this.dishRepository.findAll({where: {categoryId}});
     return dishes;
   }
-  //async remove(id: string){
-   // return this.dishRepository.destroy()
-  //}
+  async deleteOneDish(id:number){
+    const dishToDelete = await this.dishRepository.findOne({
+      where:{id:id},
+    });
+    await this.dishRepository.destroy({where:{id}});
+    return dishToDelete.id;
+  }
 }
