@@ -29,28 +29,28 @@ export class DishesService {
     await this.dishRepository.destroy({where:{id}});
     return dishToDelete.id;
   }
-  async updateOneDish(id:number, imageRef: any, updateDto: CreateDishDto){
-    await this.checkIsExist(id);
-    const dishToUpdate = await this.dishRepository.findOne({
-      where:{id:id},
-    });
-    if (updateDto.name)
-      dishToUpdate.name = updateDto.name;
-    if (updateDto.price)
-      dishToUpdate.price = updateDto.price;
-    if (updateDto.weight)
-      dishToUpdate.weight = updateDto.weight;
-    if (updateDto.description)
-      dishToUpdate.description = updateDto.description;
-    if (updateDto.categoryId)
-      dishToUpdate.categoryId = updateDto.categoryId;
-    if (imageRef) {
-      const imageFileName: string = await this.fileService.createFile(imageRef);
-      dishToUpdate.imageRef = imageFileName;
-    }
-    // @ts-ignore
-    return await this.dishRepository.save(dishToUpdate);
-  }
+  // async updateOneDish(id:number, imageRef: any, updateDto: CreateDishDto){
+  //   await this.checkIsExist(id);
+  //   const dishToUpdate = await this.dishRepository.findOne({
+  //     where:{id:id},
+  //   });
+  //   if (updateDto.name)
+  //     dishToUpdate.name = updateDto.name;
+  //   if (updateDto.price)
+  //     dishToUpdate.price = updateDto.price;
+  //   if (updateDto.weight)
+  //     dishToUpdate.weight = updateDto.weight;
+  //   if (updateDto.description)
+  //     dishToUpdate.description = updateDto.description;
+  //   if (updateDto.categoryId)
+  //     dishToUpdate.categoryId = updateDto.categoryId;
+  //   if (imageRef) {
+  //     const imageFileName: string = await this.fileService.createFile(imageRef);
+  //     dishToUpdate.imageRef = imageFileName;
+  //   }
+  //   // @ts-ignore
+  //   return await this.dishRepository.save(dishToUpdate);
+  // }
 
   private async checkIsExist(id:number){
     const dish = await this.dishRepository.findOne({
