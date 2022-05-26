@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Dish } from "./diches.model";
 import { CreateDishDto } from "./dto/create-dish.dto";
@@ -9,7 +9,6 @@ import { FilesService } from "../files/files.service";
 export class DishesService {
   constructor(@InjectModel(Dish) private dishRepository: typeof Dish,
               private fileService: FilesService) {
-
   }
 
   async createDish(dto: CreateDishDto, imageRef: any) {
@@ -23,10 +22,45 @@ export class DishesService {
     return dishes;
   }
   async deleteOneDish(id:number){
+    await this.checkIsExist(id);
     const dishToDelete = await this.dishRepository.findOne({
       where:{id:id},
     });
     await this.dishRepository.destroy({where:{id}});
     return dishToDelete.id;
+  }
+  async updateOneDish(id:number, imageRef: any, updateDto: CreateDishDto){
+    await this.checkIsExist(id);
+    const dishToUpdate = await this.dishRepository.findOne({
+      where:{id:id},
+    });
+    if (updateDto.name)
+      dishToUpdate.name = updateDto.name;
+    if (updateDto.price)
+      dishToUpdate.price = updateDto.price;
+    if (updateDto.weight)
+      dishToUpdate.weight = updateDto.weight;
+    if (updateDto.description)
+      dishToUpdate.description = updateDto.description;
+    if (updateDto.categoryId)
+      dishToUpdate.categoryId = updateDto.categoryId;
+    if (imageRef) {
+      const imageFileName: string = await this.fileService.createFile(imageRef);
+      dishToUpdate.imageRef = imageFileName;
+    }
+    // @ts-ignore
+    return await this.dishRepository.save(dishToUpdate);
+  }
+
+  private async checkIsExist(id:number){
+    const dish = await this.dishRepository.findOne({
+      where:{id:id},
+    });
+    if(!dish){
+      throw new HttpException({
+        status: HttpStatus.NOT_FOUND,
+        error: `Dish with id ${id} not found`
+      }, HttpStatus.NOT_FOUND)
+    }
   }
 }
