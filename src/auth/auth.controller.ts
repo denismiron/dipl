@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common";
 
-@Controller('admins')
-export class AdminsController {
+@Controller('auth')
+export class AuthController {
 
 }

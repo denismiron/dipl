@@ -15,11 +15,14 @@ import { CompaniesModule } from "./companies/companies.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { FilesModule } from './files/files.module';
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { UsersService } from './users/users.service';
+import { UsersController } from './users/users.controller';
+import { UsersModule } from './users/users.module';
 import * as path from 'path';
 
 @Module({
-  controllers:[],
-  providers:[],
+  controllers:[UsersController],
+  providers:[UsersService],
   imports:[
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
@@ -43,7 +46,8 @@ import * as path from 'path';
     DishesModule,
     CompaniesModule,
     CategoriesModule,
-    FilesModule
+    FilesModule,
+    UsersModule
   ]
 })
 export class AppModule{
