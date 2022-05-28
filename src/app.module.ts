@@ -36,7 +36,10 @@ import * as path from "path";
       database: process.env.POSTGRES_DB,
       ssl: true,
       dialectOptions: {
-        "ssl": { "require": true }
+        ssl: {
+          require: true,
+          rejectUnauthorized: false
+        }
       },
       models: [Review, News, Interface, Dish, Company, Categories],
       autoLoadModels: true
