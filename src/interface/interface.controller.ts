@@ -16,6 +16,4 @@ export class InterfaceController {
   getAll(){
     return this.interfaceService.getFullInterface()
   }
-
-
 }

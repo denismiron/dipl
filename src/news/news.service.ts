@@ -23,4 +23,10 @@ export class NewsService {
     await this.newsRepository.destroy({where:{id}});
     return newsToDelete.id;
   }
+  async updateOneNews(id:number, newsDto:CreateNewsDto){
+    const [updatePost] = await this.newsRepository.update({...newsDto},{
+    where:{ id, }
+    })
+    return updatePost
+  }
 }
