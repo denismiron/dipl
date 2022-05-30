@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { CategoriesService } from "./categories.service";
 import { CreateCategoriesDto } from "./dto/create-categories.dto";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller("categories")
 export class CategoriesController {
@@ -13,7 +14,9 @@ export class CategoriesController {
   }
 
   @Post()
-  create(@Body() categoriesDto: CreateCategoriesDto) {
-    return this.categoriesService.createCategories(categoriesDto);
+  @UseInterceptors(FileInterceptor('imageRef'))
+  create(@Body() categoryDto: CreateCategoriesDto,
+         @UploadedFile() imageRef){
+    return this.categoriesService.createCategory(categoryDto,imageRef)
   }
 }

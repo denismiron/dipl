@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { CreateNewsDto } from "../news/dto/create-news.dto";
 import { NewsService } from "./news.service";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 @Controller("news")
 export class NewsController {
@@ -13,12 +14,14 @@ export class NewsController {
   }
 
   @Post()
-  create(@Body() newsDto: CreateNewsDto) {
-    return this.newsService.createNews(newsDto);
+  @UseInterceptors(FileInterceptor('imageRef'))
+  create(@Body() newsDto: CreateNewsDto,
+         @UploadedFile() imageRef) {
+    return this.newsService.createNews(newsDto, imageRef);
   }
 
   @Delete('/:id')
-  deleteOneDish(@Param('id') id: number) {
+  deleteOneNews(@Param('id') id: number) {
     return { id: this.newsService.deleteOneNews(id) };
   }
   @Put('/:id')

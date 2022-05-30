@@ -11,11 +11,11 @@ interface NewsCreationAttrs{
 export class News extends Model<News, NewsCreationAttrs>{
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
-  @Column({ type: DataType.STRING, allowNull: false})
+  @Column({ type: DataType.STRING, allowNull: true})
   title: string;
-  @Column({ type: DataType.STRING, allowNull: false})
+  @Column({ type: DataType.STRING, allowNull: true})
   subTitle: string;
-  @Column({ type: DataType.STRING, allowNull: false})
+  @Column({ type: DataType.STRING, allowNull: true})
   imageRef: string;
   @Column({ type: DataType.STRING, allowNull: true})
   description: string;

@@ -24,12 +24,5 @@ export class DishesController {
   deleteOneDish(@Param('id') id: number) {
     return { id: this.dishesService.deleteOneDish(id) };
   }
-  // @Patch('/:id')
-  // updateOneDish(@Param('id')id:number,
-  //               @UploadedFile() imageRef,
-  //               @Body() dishDto: CreateDishDto){
-  //   return{
-  //     id:this.dishesService.updateOneDish(id, dishDto, imageRef)
-  //   };
-  // }
+
 }
