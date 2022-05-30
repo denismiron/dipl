@@ -24,6 +24,7 @@ export class NewsController {
   deleteOneNews(@Param('id') id: number) {
     return { id: this.newsService.deleteOneNews(id) };
   }
+
   @Put('/:id')
   @UseInterceptors(FileInterceptor('imageRef'))
   updateOneNews(@Param('id')id:number,

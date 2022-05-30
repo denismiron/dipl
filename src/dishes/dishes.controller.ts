@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { CreateDishDto } from "./dto/create-dish.dto";
 import { DishesService } from "./dishes.service";
 import { FileInterceptor } from "@nestjs/platform-express";
@@ -23,6 +23,16 @@ export class DishesController {
   @Delete('/:id')
   deleteOneDish(@Param('id') id: number) {
     return { id: this.dishesService.deleteOneDish(id) };
+  }
+
+  @Put('/:id')
+  @UseInterceptors(FileInterceptor('imageRef'))
+  updateOneDish(@Param('id')id:number,
+                @Body() dishDto: CreateDishDto,
+                @UploadedFile() imageRef){
+    return{
+      id:this.dishesService.updateOneDish(id, dishDto, imageRef)
+    };
   }
 
 }
