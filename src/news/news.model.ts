@@ -17,6 +17,6 @@ export class News extends Model<News, NewsCreationAttrs>{
   subTitle: string;
   @Column({ type: DataType.STRING, allowNull: true})
   imageRef: string;
-  @Column({ type: DataType.STRING, allowNull: true})
+  @Column({ type: DataType.TEXT, allowNull: true})
   description: string;
 }
