@@ -25,10 +25,12 @@ export class NewsController {
     return { id: this.newsService.deleteOneNews(id) };
   }
   @Put('/:id')
+  @UseInterceptors(FileInterceptor('imageRef'))
   updateOneNews(@Param('id')id:number,
-                @Body() newsDto: CreateNewsDto){
+                @Body() newsDto: CreateNewsDto,
+                @UploadedFile() imageRef){
     return{
-      id:this.newsService.updateOneNews(id, newsDto)
+      id:this.newsService.updateOneNews(id, newsDto, imageRef)
     };
   }
 }

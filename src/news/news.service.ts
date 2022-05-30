@@ -9,26 +9,38 @@ export class NewsService {
   constructor(@InjectModel(News) private newsRepository: typeof News,
               private fileService: FilesService) {
   }
-  async createNews(dto: CreateNewsDto, imageRef:any) {
+
+  async createNews(dto: CreateNewsDto, imageRef: any) {
     const fileName = await this.fileService.createFile(imageRef)
-    const news = await this.newsRepository.create({...dto, imageRef: fileName});
+    const news = await this.newsRepository.create({ ...dto, imageRef: fileName });
     return news;
   }
+
   async getAllNews() {
     const news = await this.newsRepository.findAll();
     return news;
   }
-  async deleteOneNews(id:number){
+
+  async deleteOneNews(id: number) {
     const newsToDelete = await this.newsRepository.findOne({
-      where:{id:id},
+      where: { id: id },
     });
-    await this.newsRepository.destroy({where:{id}});
+    await this.newsRepository.destroy({ where: { id } });
     return newsToDelete.id;
   }
-  async updateOneNews(id:number, newsDto:CreateNewsDto){
-    const [updatePost] = await this.newsRepository.update({...newsDto},{
-    where:{ id, }
-    })
-    return updatePost
+
+  async updateOneNews(id: number, newsDto: CreateNewsDto, imageRef: any) {
+    if (imageRef) {
+      const fileName = await this.fileService.createFile(imageRef)
+      const [updatePost] = await this.newsRepository.update({ ...newsDto, imageRef: fileName }, {
+        where: { id, }
+      })
+      return updatePost
+    } else {
+      const [updatePost] = await this.newsRepository.update(newsDto, {
+        where: { id, }
+      })
+      return updatePost
+    }
   }
 }
