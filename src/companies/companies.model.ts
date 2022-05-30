@@ -6,7 +6,7 @@ interface CompanyCreationAttrs{
   isVisable: string;
 }
 
-@Table({tableName: 'companies'})
+@Table({tableName: 'companies', createdAt: false, updatedAt: false})
 export class Company extends Model<Company, CompanyCreationAttrs>{
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;

@@ -5,7 +5,7 @@ interface InterfaceCreationAttrs{
   value: string;
 }
 
-@Table({tableName: 'interface'})
+@Table({tableName: 'interface', createdAt: false, updatedAt: false})
 export class Interface extends Model<Interface, InterfaceCreationAttrs>{
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
