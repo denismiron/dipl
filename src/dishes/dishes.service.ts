@@ -12,9 +12,14 @@ export class DishesService {
   }
 
   async createDish(dto: CreateDishDto, imageRef: any) {
-    const fileName = await this.fileService.createFile(imageRef)
-    const dish = await this.dishRepository.create({...dto, imageRef: fileName});
-    return dish;
+    if (imageRef) {
+      const fileName = await this.fileService.createFile(imageRef);
+      const dish = await this.dishRepository.create({ ...dto, imageRef: fileName });
+      return dish;
+    } else {
+      const dish = await this.dishRepository.create(dto);
+      return dish;
+    }
   }
 
   async getDishById(categoryId: number) {
