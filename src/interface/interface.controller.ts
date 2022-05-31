@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Put } from "@nestjs/common";
 import { CreateInterfaceDto } from "./dto/create-interface.dto";
 import { InterfaceService } from "./interface.service";
 
@@ -16,4 +16,10 @@ export class InterfaceController {
   getAll(){
     return this.interfaceService.getFullInterface()
   }
+
+  // @Put('/edit')
+  // edit(@Body() interfaceDto: CreateInterfaceDto){
+  //   return this.interfaceService.edit(interfaceDto)
+  // }
+
 }

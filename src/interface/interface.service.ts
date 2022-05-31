@@ -18,5 +18,12 @@ export class InterfaceService {
     const inter = await this.interfaceRepository.findAll();
     return inter;
   }
+
+ // async edit(dto: CreateInterfaceDto){
+ //
+ //    const inter = await this.interfaceRepository.findOrCreate({
+ //      where:{}
+ //    })
+ //  }
 }
 
