@@ -21,7 +21,7 @@ export class FilesService {
 
   async deleteFile(fileName){
     try{
-      fs.unlink(`/dist/static/${fileName}`, function(err){
+      fs.unlink(`..static/${fileName}`, function(err){
         if (err) {
           console.log(err);
         } else {
