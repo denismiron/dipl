@@ -15,7 +15,6 @@ export class CategoriesService {
   async createCategory(dto: CreateCategoriesDto, imageRef: any) {
     // const fileName = await this.fileService.createFile(imageRef)
     const uploadedUrl = await this.imagesService.uploadImage(imageRef)
-    // @ts-ignore
     const category = await this.categoriesRepository.create({...dto, imageRef: uploadedUrl});
     return category;
   }

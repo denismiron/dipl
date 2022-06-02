@@ -10,13 +10,13 @@ cloudinary.config({
 @Injectable()
 export class ImagesService {
   async uploadImage(imageRef: any){
-    let reader = new FileReader()
-    reader.readAsDataURL(imageRef)
+    const stringRef = JSON.stringify(imageRef)
+    const uploadedName = await cloudinary.uploader.upload(stringRef)
+    return uploadedName.url
     // const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
-    reader.onload = async function(){
-      const uploadedName = await cloudinary.uploader.upload(imageRef)
-      return uploadedName.url
-    }
+
+
+
 
 
 
