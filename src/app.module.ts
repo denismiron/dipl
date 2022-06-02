@@ -17,11 +17,17 @@ import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { ImagesModule } from './images/images.module';
 import * as path from "path";
+const cloudinary = require('cloudinary').v2;
 
 @Module({
   controllers: [],
   providers: [],
   imports: [
+    cloudinary.config({
+      cloud_name: 'bistro-obed-bufet',
+      api_key: '629223456471373',
+      api_secret: 'Dl6-R9zsY116vEn12eVdmB9vkIs'
+    }),
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
     }),

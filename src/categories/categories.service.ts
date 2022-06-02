@@ -3,18 +3,19 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Categories } from "./categories.model";
 import { CreateCategoriesDto } from "./dto/create-categories.dto";
 import { FilesService } from "../files/files.service";
-const cloudinary = require('../utils/cloudinary');
+import {ImagesService} from "../images/images.service";
 
 @Injectable()
 export class CategoriesService {
   constructor(@InjectModel( Categories) private categoriesRepository: typeof  Categories,
-              private fileService: FilesService) {
+              private fileService: FilesService,
+              private imagesService: ImagesService) {
   }
 
   async createCategory(dto: CreateCategoriesDto, imageRef: any) {
-    const request = await cloudinary.uploader.upload(imageRef)
-    let fileName = request.url
-    const category = await this.categoriesRepository.create({...dto, imageRef: fileName});
+    const fileName = await this.fileService.createFile(imageRef)
+    const uploadedName = await this.imagesService.uploadImage(fileName)
+    const category = await this.categoriesRepository.create({...dto, imageRef: uploadedName});
     return category;
   }
 
