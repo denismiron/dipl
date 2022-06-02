@@ -1,4 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import { FilesService } from "../files/files.service";
+
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({
   cloud_name: 'bistro-obed-bufet',
@@ -8,8 +10,14 @@ cloudinary.config({
 @Injectable()
 export class ImagesService {
   async uploadImage(imageRef: any){
+    let reader = new FileReader()
+    reader.readAsDataURL(imageRef)
     // const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
-    const uploadedName = await cloudinary.uploader.upload(imageRef)
-    return uploadedName.url
+    reader.onload = async function(){
+      const uploadedName = await cloudinary.uploader.upload(imageRef)
+      return uploadedName.url
+    }
+
+
   }
 }
