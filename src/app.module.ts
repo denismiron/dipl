@@ -23,11 +23,6 @@ const cloudinary = require('cloudinary').v2;
   controllers: [],
   providers: [],
   imports: [
-    cloudinary.config({
-      cloud_name: 'bistro-obed-bufet',
-      api_key: '629223456471373',
-      api_secret: 'Dl6-R9zsY116vEn12eVdmB9vkIs'
-    }),
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
     }),
