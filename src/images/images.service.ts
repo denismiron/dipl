@@ -8,7 +8,8 @@ cloudinary.config({
 @Injectable()
 export class ImagesService {
   async uploadImage(imageRef: any){
-    const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
+    // const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
+    const uploadedName = await cloudinary.uploader.upload(imageRef)
     return uploadedName.url
   }
 }
