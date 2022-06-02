@@ -17,6 +17,5 @@ export class ImagesService {
     // let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
     // const uploadedName = await cloudinary.uploader.upload(objJsonB64)
     // return uploadedName.url
-
   }
 }

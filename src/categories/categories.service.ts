@@ -16,6 +16,7 @@ export class CategoriesService {
     const fileName = await this.fileService.createFile(imageRef)
     const uploadedUrl = await this.imagesService.uploadImage(fileName)
     const category = await this.categoriesRepository.create({...dto, imageRef: uploadedUrl});
+    await this.fileService.deleteFile(fileName)
     return category;
   }
 
