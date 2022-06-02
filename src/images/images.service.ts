@@ -10,15 +10,11 @@ cloudinary.config({
 @Injectable()
 export class ImagesService {
   async uploadImage(imageRef: any){
-    const stringRef = JSON.stringify(imageRef)
-    const uploadedName = await cloudinary.uploader.upload(stringRef)
-    return uploadedName.url
+    // const uploadedName = await cloudinary.uploader.upload(imageRef)
+    // return uploadedName.url
     // const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
-
-
-
-
-
-
+    const image = await new Promise(resolve => imageRef.toBlob(resolve, 'image/png'));
+    const uploadedName = await cloudinary.uploader.upload(image)
+    return uploadedName.url
   }
 }
