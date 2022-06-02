@@ -19,4 +19,6 @@ export class CategoriesController {
          @UploadedFile() imageRef){
     return this.categoriesService.createCategory(categoryDto,imageRef)
   }
+
+  // @Delete()
 }

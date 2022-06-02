@@ -15,6 +15,7 @@ import { CompaniesModule } from "./companies/companies.module";
 import { CategoriesModule } from "./categories/categories.module";
 import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
+import { ImagesModule } from './images/images.module';
 import * as path from "path";
 
 @Module({
@@ -50,7 +51,8 @@ import * as path from "path";
     DishesModule,
     CompaniesModule,
     CategoriesModule,
-    FilesModule
+    FilesModule,
+    ImagesModule
   ]
 })
 export class AppModule {

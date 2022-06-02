@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Categories } from "./categories.model";
 import { CreateCategoriesDto } from "./dto/create-categories.dto";
 import { FilesService } from "../files/files.service";
-
+const cloudinary = require('../utils/cloudinary');
 
 @Injectable()
 export class CategoriesService {
@@ -12,7 +12,8 @@ export class CategoriesService {
   }
 
   async createCategory(dto: CreateCategoriesDto, imageRef: any) {
-    const fileName = await this.fileService.createFile(imageRef)
+    const request = await cloudinary.uploader.upload(imageRef)
+    let fileName = request.url
     const category = await this.categoriesRepository.create({...dto, imageRef: fileName});
     return category;
   }
