@@ -14,12 +14,10 @@ export class ImagesService {
     // return uploadedName.url
     // const uploadedName = await cloudinary.uploader.upload(`https://restarauntbistro-obed.herokuapp.com/${imageRef}`)
     // const image = await new Promise(resolve => imageRef.toBlob(resolve, 'image/png'));
-    let reader = new FileReader();
-    const image = reader.readAsDataURL(await new Promise(resolve => imageRef.toBlob(resolve, 'image/png')));
-    reader.onload = async function() {
-      const uploadedName = await cloudinary.uploader.upload(image)
-      return uploadedName.url
-    };
+    let objJsonStr = JSON.stringify(imageRef);
+    let objJsonB64 = Buffer.from(objJsonStr).toString("base64");
+    const uploadedName = await cloudinary.uploader.upload(objJsonB64)
+    return uploadedName.url
 
   }
 }
