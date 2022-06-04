@@ -3,19 +3,21 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Dish } from "./diches.model";
 import { CreateDishDto } from "./dto/create-dish.dto";
 import { FilesService } from "../files/files.service";
-import { CreateNewsDto } from "../news/dto/create-news.dto";
+import { ImagesService } from "../images/images.service";
 
 
 @Injectable()
 export class DishesService {
   constructor(@InjectModel(Dish) private dishRepository: typeof Dish,
-              private fileService: FilesService) {
+              private fileService: FilesService,
+              private imagesService: ImagesService) {
   }
 
   async createDish(dto: CreateDishDto, imageRef: any) {
     if (imageRef) {
       const fileName = await this.fileService.createFile(imageRef);
-      const dish = await this.dishRepository.create({ ...dto, imageRef: fileName });
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const dish = await this.dishRepository.create({ ...dto, imageRef: uploadedUrl });
       return dish;
     } else {
       const dish = await this.dishRepository.create(dto);
@@ -40,7 +42,8 @@ export class DishesService {
   async updateOneDish(id: number, dishDto: CreateDishDto, imageRef: any) {
     if (imageRef) {
       const fileName = await this.fileService.createFile(imageRef)
-      const [updateDish] = await this.dishRepository.update({ ...dishDto, imageRef: fileName }, {
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const [updateDish] = await this.dishRepository.update({ ...dishDto, imageRef: uploadedUrl }, {
         where: { id, }
       })
       return updateDish

@@ -24,4 +24,11 @@ export class CategoriesService {
     const categories = await this.categoriesRepository.findAll();
     return categories;
   }
+  async deleteOneCategory(id:number){
+    const categoryToDelete = await this.categoriesRepository.findOne({
+      where:{id:id},
+    });
+    await this.categoriesRepository.destroy({where:{id}});
+    return categoryToDelete.id;
+  }
 }
