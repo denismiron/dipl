@@ -4,6 +4,7 @@ import { Dish } from "../dishes/diches.model";
 interface CategoriesCreationAttrs{
   imageRef: string;
   name: string;
+  description: string;
 }
 
 @Table({tableName: 'categories',createdAt: false, updatedAt: false})
@@ -15,6 +16,8 @@ export class Categories extends Model<Categories, CategoriesCreationAttrs>{
   imageRef: string;
   @Column({ type: DataType.STRING, allowNull: true})
   name: string;
+  @Column({ type: DataType.STRING, allowNull: true})
+  description: string;
   @HasMany(()=>Dish)
   dishes: Dish[]
 }
