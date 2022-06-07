@@ -16,6 +16,8 @@ import { CategoriesModule } from "./categories/categories.module";
 import { FilesModule } from "./files/files.module";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { ImagesModule } from './images/images.module';
+import { RolesModule } from './roles/roles.module';
+import { UsersModule } from './users/users.module';
 import * as path from "path";
 const cloudinary = require('cloudinary').v2;
 
@@ -53,7 +55,9 @@ const cloudinary = require('cloudinary').v2;
     CompaniesModule,
     CategoriesModule,
     FilesModule,
-    ImagesModule
+    ImagesModule,
+    RolesModule,
+    UsersModule
   ]
 })
 export class AppModule {
