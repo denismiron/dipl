@@ -9,6 +9,7 @@ async function start(){
     const config = new DocumentBuilder()
       .setTitle("обед-буфет")
       .setDescription("Документация api")
+      .addBearerAuth()
       .build()
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup("/api/docs", app, document)
