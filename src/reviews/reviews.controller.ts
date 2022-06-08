@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Post } from "@nestjs/common";
 import { CreateReviewDto } from "./dto/create-review.dto";
 import { ReviewsService } from "./reviews.service";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Review } from "./reviews.model";
 
+@ApiTags('Отзывы пользователей')
 @Controller('reviews')
 export class ReviewsController {
   constructor(private reviewsService: ReviewsService) {
