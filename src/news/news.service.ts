@@ -3,18 +3,21 @@ import { InjectModel } from "@nestjs/sequelize";
 import { News } from "./news.model";
 import { CreateNewsDto } from "./dto/create-news.dto";
 import { FilesService } from "../files/files.service";
+import { ImagesService } from "../images/images.service";
 
 @Injectable()
 export class NewsService {
   constructor(@InjectModel(News) private newsRepository: typeof News,
-              private fileService: FilesService) {
+              private fileService: FilesService,
+              private imagesService: ImagesService) {
   }
 
   async createNews(dto: CreateNewsDto, imageRef: any) {
     try {
       if (imageRef) {
         const fileName = await this.fileService.createFile(imageRef);
-        const newsNew = await this.newsRepository.create({ ...dto, imageRef: fileName });
+        const uploadedUrl = await this.imagesService.uploadImage(fileName)
+        const newsNew = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
         return newsNew;
       } else {
         const newsNew = await this.newsRepository.create(dto);
@@ -40,8 +43,9 @@ export class NewsService {
 
   async updateOneNews(id: number, newsDto: CreateNewsDto, imageRef: any) {
     if (imageRef) {
-      const fileName = await this.fileService.createFile(imageRef)
-      const [updatePost] = await this.newsRepository.update({ ...newsDto, imageRef: fileName }, {
+      const fileName = await this.fileService.createFile(imageRef);
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const [updatePost] = await this.newsRepository.update({ ...newsDto, imageRef: uploadedUrl }, {
         where: { id, }
       })
       return updatePost

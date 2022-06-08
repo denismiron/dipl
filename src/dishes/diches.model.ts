@@ -1,6 +1,6 @@
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
 import { Categories } from "../categories/categories.model";
-import { ApiProperty, ApiTags } from "@nestjs/swagger";
+import { ApiProperty } from "@nestjs/swagger";
 
 interface DishCreationAttrs{
   name: string;
