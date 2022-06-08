@@ -2,8 +2,9 @@ import {Body, Controller, Post} from '@nestjs/common';
 
 import {CreateUserDto} from "../users/dto/create-user.dto";
 import {AuthService} from "./auth.service";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags("Сюда не лезем пока что")
 @Controller('auth')
 export class AuthController {
 

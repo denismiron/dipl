@@ -7,8 +7,9 @@ import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
 import {AddRoleDto} from "./dto/add-role.dto";
 import {BanUserDto} from "./dto/ban-user.dto";
+import { ApiTags } from "@nestjs/swagger";
 
-
+@ApiTags("Сюда не лезем пока что")
 @Controller('users')
 export class UsersController {
 
