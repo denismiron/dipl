@@ -1,9 +1,20 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseInterceptors
+} from "@nestjs/common";
 import { CreateNewsDto } from "../news/dto/create-news.dto";
 import { NewsService } from "./news.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { News } from "./news.model";
+
 
 @ApiTags("Новости")
 @Controller("news")
