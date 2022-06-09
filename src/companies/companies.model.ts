@@ -18,7 +18,7 @@ export class Company extends Model<Company, CompanyCreationAttrs>{
   @ApiProperty({example:'шгугл', description:'компания основана в 1239843 году'})
   @Column({ type: DataType.STRING, allowNull: false})
   name: string;
-  @ApiProperty({example:'1'})
+  @ApiProperty({example:'false'})
   @Column({ type: DataType.STRING, allowNull: false})
   isVisable: boolean;
 }

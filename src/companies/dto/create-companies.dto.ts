@@ -7,6 +7,6 @@ export class CreateCompanyDto{
   @ApiProperty({example:'http://ссылка на cloudinary', description:'ссылка на url компании'})
   readonly imageRef: string;
 
-  @ApiProperty({example:'1'})
+  @ApiProperty({example:'false'})
   readonly isVisable: boolean;
 }
