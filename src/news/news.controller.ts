@@ -14,6 +14,8 @@ import { NewsService } from "./news.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { News } from "./news.model";
+import { Dish } from "../dishes/diches.model";
+import { CreateDishDto } from "../dishes/dto/create-dish.dto";
 
 
 
@@ -29,13 +31,13 @@ export class NewsController {
     return this.newsService.getAllNews();
   }
 
-  @ApiOperation({summary:"Создание Новости"})
-  @ApiResponse({status:200, type: News })
+  @ApiOperation({summary:"Создание новости"})
+  @ApiResponse({status:200, type: News})
   @Post()
   @UseInterceptors(FileInterceptor('imageRef'))
   create(@Body() newsDto: CreateNewsDto,
-         @UploadedFile() imageRef) {
-    return this.newsService.createNews(newsDto, imageRef);
+         @UploadedFile() imageRef){
+    return this.newsService.createNews(newsDto,imageRef)
   }
 
   @ApiOperation({summary:"Удаление Новости"})

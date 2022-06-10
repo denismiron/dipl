@@ -5,6 +5,7 @@ import { CreateNewsDto } from "./dto/create-news.dto";
 import { FilesService } from "../files/files.service";
 import { ImagesService } from "../images/images.service";
 
+
 @Injectable()
 export class NewsService {
   constructor(@InjectModel(News) private newsRepository: typeof News,
@@ -13,18 +14,14 @@ export class NewsService {
   }
 
   async createNews(dto: CreateNewsDto, imageRef: any) {
-    try {
-      if (imageRef) {
-        const fileName = await this.fileService.createFile(imageRef);
-        const uploadedUrl = await this.imagesService.uploadImage(fileName)
-        const newsNew = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
-        return newsNew;
-      } else {
-        const newsNew = await this.newsRepository.create(dto);
-        return newsNew;
-      }
-    } catch (e) {
-      throw new HttpException("Произошла ошибка", HttpStatus.INTERNAL_SERVER_ERROR);
+    if (imageRef) {
+      const fileName = await this.fileService.createFile(imageRef);
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const news = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
+      return news;
+    } else {
+      const news = await this.newsRepository.create(dto);
+      return news;
     }
   }
 
