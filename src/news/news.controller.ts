@@ -14,8 +14,7 @@ import { NewsService } from "./news.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { News } from "./news.model";
-import { Dish } from "../dishes/diches.model";
-import { CreateDishDto } from "../dishes/dto/create-dish.dto";
+
 
 
 

@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { News } from "./news.model";
 import { CreateNewsDto } from "./dto/create-news.dto";
@@ -17,11 +17,11 @@ export class NewsService {
     if (imageRef) {
       const fileName = await this.fileService.createFile(imageRef);
       const uploadedUrl = await this.imagesService.uploadImage(fileName)
-      const news = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
-      return news;
+      const newNews = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
+      return newNews;
     } else {
-      const news = await this.newsRepository.create(dto);
-      return news;
+      const newNews = await this.newsRepository.create(dto);
+      return newNews;
     }
   }
 

@@ -18,6 +18,7 @@ export class DishesController {
          @UploadedFile() imageRef){
     return this.dishesService.createDish(dishDto,imageRef)
   }
+
   @ApiOperation({summary:"Получение блюд по id категории"})
   @ApiResponse({status:200, type: [Dish]})
   @Get('/:getById')

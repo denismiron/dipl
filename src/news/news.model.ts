@@ -8,21 +8,22 @@ interface NewsCreationAttrs{
   description: string;
 }
 
-@Table({tableName: 'news'})
+@Table({tableName: 'news', createdAt: false, updatedAt: false})
 export class News extends Model<News, NewsCreationAttrs>{
   @ApiProperty({example:'1', description:'идентификатор'})
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
 
   @ApiProperty({example:'Доставка ланчей по будням!', description:'Заголовок новости'})
-  @Column({ type: DataType.STRING, allowNull: true})
+  @Column({ type: DataType.STRING, allowNull: false})
   title: string;
 
   @ApiProperty({example:'МЫ ЭТО СДЕЛАЛИ УРААААААААА!', description:'Подзаголовок новости'})
   @Column({ type: DataType.STRING, allowNull: true})
   subTitle: string;
 
-  @ApiProperty({example:'http://ссылка на cloudinary', description:'ссылка на url новости'})
+  @ApiProperty({example:'http://res.cloudinary.com/bistro-obed-bufet/image/upload/v1654358799/r690z4wvg75l6v1gpjbn.png',
+    description:'Приходит файл — получется ссылка на изображение на cloudinary'})
   @Column({ type: DataType.STRING, allowNull: true})
   imageRef: string;
 
