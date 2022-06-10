@@ -35,7 +35,7 @@ interface DishCreationAttrs{
    @Column({ type: DataType.STRING, allowNull: true})
    imageRef: string;
 
-  @ApiProperty({example:'Самое лучшее блюдо там огурцы есть пидоморы лук', description:'Описание блюда'})
+  @ApiProperty({example:'Самое лучшее блюдо там огурцы есть помидоры лук', description:'Описание блюда'})
    @Column({ type: DataType.STRING, allowNull: true})
    description: string;
 

@@ -14,7 +14,7 @@ export class CreateDishDto{
   @ApiProperty({example:'15', description:'Цена блюда'})
   readonly price: string;
 
-  @ApiProperty({example:'Самое лучшее блюдо там огурцы есть пидоморы лук', description:'Описание блюда'})
+  @ApiProperty({example:'Самое лучшее блюдо там огурцы есть помидоры лук', description:'Описание блюда'})
   readonly description: string;
 
   @ApiProperty({example:'2', description:'идентификатор категории к которму относится блюдо (идентификатор категории должен существовать)'})
