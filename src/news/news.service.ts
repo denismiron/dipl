@@ -13,14 +13,14 @@ export class NewsService {
               private imagesService: ImagesService) {
   }
 
-  async createNews(dto: CreateNewsDto, imageRef: any) {
+  async createNews(newsDto: CreateNewsDto, imageRef: any) {
     if (imageRef) {
       const fileName = await this.fileService.createFile(imageRef);
       const uploadedUrl = await this.imagesService.uploadImage(fileName)
-      const newNews = await this.newsRepository.create({ ...dto, imageRef: uploadedUrl });
+      const newNews = await this.newsRepository.create({ ...newsDto, imageRef: uploadedUrl });
       return newNews;
     } else {
-      const newNews = await this.newsRepository.create(dto);
+      const newNews = await this.newsRepository.create(newsDto);
       return newNews;
     }
   }

@@ -16,8 +16,6 @@ import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { News } from "./news.model";
 
 
-
-
 @ApiTags("Новости")
 @Controller("news")
 export class NewsController {
