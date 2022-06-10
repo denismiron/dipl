@@ -16,8 +16,8 @@ export class NewsService {
   async createNews(newsDto: CreateNewsDto, imageRef: any) {
     if (imageRef) {
       const fileName = await this.fileService.createFile(imageRef);
-      const uploadedUrl = await this.imagesService.uploadImage(fileName)
-      const newNews = await this.newsRepository.create({ ...newsDto, imageRef: uploadedUrl });
+      const uploadUrl = await this.imagesService.uploadImage(fileName)
+      const newNews = await this.newsRepository.create({ ...newsDto, imageRef: uploadUrl });
       return newNews;
     } else {
       const newNews = await this.newsRepository.create(newsDto);

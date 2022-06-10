@@ -30,7 +30,7 @@ export class NewsController {
 
   @ApiOperation({summary:"Создание новости"})
   @ApiResponse({status:200, type: News})
-  @Post()
+  @Post("/addNews")
   @UseInterceptors(FileInterceptor('imageRef'))
   create(@Body() newsDto: CreateNewsDto,
          @UploadedFile() imageRef){
