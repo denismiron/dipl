@@ -1,9 +1,23 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Put,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors
+} from "@nestjs/common";
 import { CreateDishDto } from "./dto/create-dish.dto";
 import { DishesService } from "./dishes.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Dish } from "./diches.model";
+import { Roles } from "../auth/roles-auth.decorator";
+import { RolesGuard } from "../auth/roles.guard";
 
 @ApiTags("Блюда")
 @Controller("dishes")
@@ -28,6 +42,8 @@ export class DishesController {
 
   @ApiOperation({summary:"Удаление блюда"})
   @ApiResponse({status:200})
+  @Roles("ADMIN")
+  @UseGuards(RolesGuard)
   @Delete('/:id')
   deleteOneDish(@Param('id') id: number) {
     return { id: this.dishesService.deleteOneDish(id) };
