@@ -19,10 +19,10 @@ export class Review extends Model<Review, ReviewCreationAttrs>{
   @ApiProperty({example:'Всё было здорово!', description:'Сообщение пользователя'})
   @Column({ type: DataType.TEXT, allowNull: false})
   message: string;
-  @ApiProperty({example:'Спасибо за отзыв!', description:'Ответ администратора'})
-  @Column({ type: DataType.TEXT, allowNull: true})
-  adminMessage: string;
   @ApiProperty({example:'Гоша', description:'Имя пользователя'})
   @Column({ type: DataType.STRING, allowNull: false})
   name: string;
+  @ApiProperty({example:'Спасибо за отзыв!', description:'Ответ администратора'})
+  @Column({ type: DataType.TEXT, allowNull: true})
+  adminMessage: string;
 }
