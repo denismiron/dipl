@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Review } from "./reviews.model";
 import { CreateReviewDto } from "./dto/create-review.dto";
+import { UpdateReviewDto } from "./dto/update-review.dto";
 
 @Injectable()
 export class ReviewsService {
@@ -31,7 +32,7 @@ export class ReviewsService {
     return reviewToDelete;
   }
 
-  async updateOneReview(id: number, dto: CreateReviewDto){
+  async updateOneReview(id: number, dto: UpdateReviewDto){
    const updateReview = await this.reviewRepository.update(dto, {
       where: { id, }
     })
