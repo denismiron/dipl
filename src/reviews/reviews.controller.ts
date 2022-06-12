@@ -7,18 +7,18 @@ import {
   Post,
   Put,
   UploadedFile,
-  UseGuards,
   UseInterceptors
 } from "@nestjs/common";
 import { CreateReviewDto } from "./dto/create-review.dto";
 import { ReviewsService } from "./reviews.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Review } from "./reviews.model";
-import { Roles } from "../auth/roles-auth.decorator";
-import { RolesGuard } from "../auth/roles.guard";
 import { Dish } from "../dishes/diches.model";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { CreateDishDto } from "../dishes/dto/create-dish.dto";
+import { UpdateReviewDto } from "./dto/update-review.dto";
+
+
+
 
 @ApiTags('Отзывы пользователей')
 @Controller('reviews')
@@ -57,7 +57,7 @@ export class ReviewsController {
   @Put('/:id')
   @UseInterceptors(FileInterceptor('imageRef'))
   updateOneDish(@Param('id')id:number,
-                @Body() reviewDto: CreateReviewDto,
+                @Body() reviewDto: UpdateReviewDto,
                 @UploadedFile() imageRef){
     return{
       id:this.reviewsService.updateOneReview(id, reviewDto)
