@@ -15,11 +15,18 @@ export class ReviewsController {
   create(@Body() reviewDto: CreateReviewDto) {
     return this.reviewsService.createReview(reviewDto);
   }
-  @ApiOperation({summary:"Получение отзыва"})
+  @ApiOperation({summary:"Получение отзыва для админа"})
   @ApiResponse({status:200, type: [Review]})
-  @Get()
+  @Get('/getAllForAdmin')
   getAll(){
     return this.reviewsService.getAllReviews()
+  }
+
+  @ApiOperation({summary:"Получение отзыва"})
+  @ApiResponse({status:200, type: [Review]})
+  @Get('/getAllForClient')
+  getInfo(){
+    return this.reviewsService.getAllReviewsInfo()
   }
 
 

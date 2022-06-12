@@ -18,4 +18,11 @@ export class ReviewsService {
     const reviews = await this.reviewRepository.findAll();
     return reviews;
   }
+
+  async getAllReviewsInfo(){
+    const reviews = await this.reviewRepository.findAll({
+      attributes:['id','message',' adminMessage','name']
+    })
+    return reviews;
+  }
 }
