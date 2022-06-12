@@ -18,6 +18,7 @@ import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Dish } from "./diches.model";
 import { Roles } from "../auth/roles-auth.decorator";
 import { RolesGuard } from "../auth/roles.guard";
+import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
 @ApiTags("Блюда")
 @Controller("dishes")
