@@ -10,8 +10,20 @@ export class InterfaceService {
   }
 
   async createInterface(dto: CreateInterfaceDto) {
-    const inter = await this.interfaceRepository.create(dto);
-    return inter;
+    const interfaceToCheck = await this.interfaceRepository.findOne({
+      where: { key: dto.key }
+    });
+    const value = dto.value
+    if(!interfaceToCheck){
+      const inter = await this.interfaceRepository.create(dto);
+      return inter;
+    }else{
+      const interUpdate = this.interfaceRepository.update({value}, {
+        where: { key:  dto.key}
+      })
+      return interUpdate
+    }
+
   }
 
   async getFullInterface() {
@@ -19,11 +31,11 @@ export class InterfaceService {
     return inter;
   }
 
- // async edit(dto: CreateInterfaceDto){
- //
- //    const inter = await this.interfaceRepository.findOrCreate({
- //      where:{}
- //    })
- //  }
+  // async edit(dto: CreateInterfaceDto){
+  //
+  //    const inter = await this.interfaceRepository.findOrCreate({
+  //      where:{}
+  //    })
+  //  }
 }
 
