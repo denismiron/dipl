@@ -7,21 +7,22 @@ import {Roles} from "../auth/roles-auth.decorator";
 import {RolesGuard} from "../auth/roles.guard";
 import {AddRoleDto} from "./dto/add-role.dto";
 import {BanUserDto} from "./dto/ban-user.dto";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiExcludeEndpoint, ApiTags } from "@nestjs/swagger";
 
-@ApiTags("Сюда не лезем пока что")
+
+
 @Controller('users')
 export class UsersController {
 
   constructor(private usersService: UsersService) {}
 
-
+  @ApiExcludeEndpoint()
   @Post()
   create(@Body() userDto: CreateUserDto) {
     return this.usersService.createUser(userDto);
   }
 
-
+  @ApiExcludeEndpoint()
   @Roles("ADMIN")
   @UseGuards(RolesGuard)
   @Get()
@@ -29,7 +30,7 @@ export class UsersController {
     return this.usersService.getAllUsers();
   }
 
-
+  @ApiExcludeEndpoint()
   @Roles("ADMIN")
   @UseGuards(RolesGuard)
   @Post('/role')
@@ -37,7 +38,7 @@ export class UsersController {
     return this.usersService.addRole(dto);
   }
 
-
+  @ApiExcludeEndpoint()
   @Roles("ADMIN")
   @UseGuards(RolesGuard)
   @Post('/ban')
