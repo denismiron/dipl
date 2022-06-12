@@ -1,8 +1,24 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors
+} from "@nestjs/common";
 import { CreateReviewDto } from "./dto/create-review.dto";
 import { ReviewsService } from "./reviews.service";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Review } from "./reviews.model";
+import { Roles } from "../auth/roles-auth.decorator";
+import { RolesGuard } from "../auth/roles.guard";
+import { Dish } from "../dishes/diches.model";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { CreateDishDto } from "../dishes/dto/create-dish.dto";
 
 @ApiTags('Отзывы пользователей')
 @Controller('reviews')
@@ -27,6 +43,25 @@ export class ReviewsController {
   @Get()
   getInfo(){
     return this.reviewsService.getAllReviewsInfo()
+  }
+
+  @ApiOperation({summary:"Удаление отзыва"})
+  @ApiResponse({status:200})
+  @Delete('/:id')
+  deleteReview(@Param('id') id: number) {
+    return { id: this.reviewsService.deleteOneReview(id) };
+  }
+
+  @ApiOperation({summary:"Изменение отзыва"})
+  @ApiResponse({status:200, type: [Dish]})
+  @Put('/:id')
+  @UseInterceptors(FileInterceptor('imageRef'))
+  updateOneDish(@Param('id')id:number,
+                @Body() reviewDto: CreateReviewDto,
+                @UploadedFile() imageRef){
+    return{
+      id:this.reviewsService.updateOneReview(id, reviewDto)
+    };
   }
 
 

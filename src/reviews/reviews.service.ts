@@ -25,4 +25,16 @@ export class ReviewsService {
     })
     return reviews;
   }
+
+  async deleteOneReview(id:number){
+   const reviewToDelete =  await this.reviewRepository.destroy({where:{id}});
+    return reviewToDelete;
+  }
+
+  async updateOneReview(id: number, dto: CreateReviewDto){
+   const updateReview = await this.reviewRepository.update(dto, {
+      where: { id, }
+    })
+    return updateReview
+  }
 }
