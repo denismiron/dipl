@@ -21,7 +21,7 @@ export class ReviewsService {
 
   async getAllReviewsInfo(){
     const reviews = await this.reviewRepository.findAll({
-      attributes:['id','message',' adminMessage','name']
+      attributes: { exclude: ['phone'] }
     })
     return reviews;
   }

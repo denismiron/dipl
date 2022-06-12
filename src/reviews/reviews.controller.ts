@@ -24,7 +24,7 @@ export class ReviewsController {
 
   @ApiOperation({summary:"Получение отзыва"})
   @ApiResponse({status:200, type: [Review]})
-  @Get('/getAllForClient')
+  @Get()
   getInfo(){
     return this.reviewsService.getAllReviewsInfo()
   }
