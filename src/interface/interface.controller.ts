@@ -33,16 +33,12 @@ export class InterfaceController {
   @ApiOperation({summary:"Создание/изменение интерфейса С КАРТИНКОЙ."})
   @ApiResponse({status:200, type: Interface})
 
-  @Post('/edit-image')
+  @Put('/edit-image')
   @UseInterceptors(FileInterceptor("value"))
   editImage(@Body() interfaceDto: CreateInterfaceDto,
             @UploadedFile() value) {
     return this.interfaceService.createInterfaceImage(value, interfaceDto);
   }
 
-  // @Put('/edit')
-  // edit(@Body() interfaceDto: CreateInterfaceDto){
-  //   return this.interfaceService.edit(interfaceDto)
-  // }
 
 }

@@ -4,6 +4,6 @@ export class CreateInterfaceDto{
   @ApiProperty({example:'SiteTitle', description:'ключик'})
   readonly key: string;
 
-  @ApiProperty({example:'Обед-буфет:)', description:'Значение'})
+  @ApiProperty({example:'Обед-буфет:)', description:'Хранится строковое значение или ссылка на изображение.'})
   readonly value: string;
 }
