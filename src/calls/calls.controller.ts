@@ -10,7 +10,7 @@ import {CreateCallDto} from "./dto/create-call.dto";
 export class CallsController {
   constructor(private callsService:CallsService) {
   }
-  @Get("")
+  @Get()
   getCalls(){
     return this.callsService.takeCalls()
   }
