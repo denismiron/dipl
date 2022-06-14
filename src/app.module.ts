@@ -7,6 +7,7 @@ import { News } from "./news/news.model";
 import { Company } from "./companies/companies.model";
 import { Categories } from "./categories/categories.model";
 import { Dish } from "./dishes/diches.model";
+import {Call} from "./calls/calls.model"
 import { NewsModule } from "./news/news.module";
 import { ReviewsModule } from "./reviews/reviews.module";
 import { InterfaceModule } from "./interface/interface.module";
@@ -46,7 +47,7 @@ const cloudinary = require('cloudinary').v2;
           rejectUnauthorized: false
         }
       },
-      models: [Review, News, Interface, Dish, Company, Categories],
+      models: [Review, News, Interface, Dish, Company, Categories, Call],
       autoLoadModels: true
     }),
     ReviewsModule,
