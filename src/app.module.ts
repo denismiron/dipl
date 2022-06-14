@@ -18,13 +18,13 @@ import { ServeStaticModule } from "@nestjs/serve-static";
 import { ImagesModule } from './images/images.module';
 import { RolesModule } from './roles/roles.module';
 import { UsersModule } from './users/users.module';
-import { MailerService } from './mailer/mailer.service';
+import { CallsModule } from "./calls/calls.module";
 import * as path from "path";
 const cloudinary = require('cloudinary').v2;
 
 @Module({
   controllers: [],
-  providers: [MailerService],
+  providers: [],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.${process.env.NODE_ENV}.env`
@@ -58,7 +58,8 @@ const cloudinary = require('cloudinary').v2;
     FilesModule,
     ImagesModule,
     RolesModule,
-    UsersModule
+    UsersModule,
+    CallsModule
   ]
 })
 export class AppModule {
