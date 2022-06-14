@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Call } from "./calls.model";
-import {CreateCallDto} from "./dto/creare-call.dto"
+import {CreateCallDto} from "./dto/create-call.dto"
 
 
 @Injectable()
@@ -21,5 +21,4 @@ export class CallsService {
     const calls = await this.callRepository.findAll();
     return calls;
   }
-
 }

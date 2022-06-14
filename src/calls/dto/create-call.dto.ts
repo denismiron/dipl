@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Dish } from "../../dishes/diches.model";
+
 
 export class CreateCallDto{
   @ApiProperty({ example: 'Андрей', description: 'Имя человека' })

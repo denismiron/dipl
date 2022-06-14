@@ -2,7 +2,7 @@ import { Body, Controller, Post, Get } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 
 import {CallsService} from "./calls.service";
-import {CreateCallDto} from "./dto/creare-call.dto";
+import {CreateCallDto} from "./dto/create-call.dto";
 
 
 @ApiTags("Заказы(корзина)")
@@ -10,7 +10,7 @@ import {CreateCallDto} from "./dto/creare-call.dto";
 export class CallsController {
   constructor(private callsService:CallsService) {
   }
-  @Get("/viewCalls")
+  @Get("")
   getCalls(){
     return this.callsService.takeCalls()
   }
