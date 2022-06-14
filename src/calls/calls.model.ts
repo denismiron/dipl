@@ -9,7 +9,7 @@ interface CallCreationAttrs{
 }
 
 
-@Table({tableName: 'dishes', createdAt: false, updatedAt: false})
+@Table({tableName: 'calls', createdAt: false, updatedAt: false})
 export class Call extends Model<Call, CallCreationAttrs> {
   @ApiProperty({ example: '1', description: 'идентификатор' })
   @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
