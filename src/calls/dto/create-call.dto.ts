@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { Dish } from "../../dishes/diches.model";
 
 
 export class CreateCallDto{
@@ -9,5 +10,5 @@ export class CreateCallDto{
   readonly phone: string;
 
   @ApiProperty({ example: 'Ну там блюда какие-то наверное'})
-  readonly menu: string;
+  readonly menu: Dish;
 }
