@@ -47,7 +47,10 @@ export class NewsService {
       })
       return updatePost
     } else {
-      const [updatePost] = await this.newsRepository.update(newsDto, {
+      const [updatePost] = await this.newsRepository.update({
+        title: newsDto.title,
+        description: newsDto.description,
+        subTitle: newsDto.subTitle}, {
         where: { id, }
       })
       return updatePost

@@ -9,6 +9,7 @@ export class CallsService {
   constructor(@InjectModel(Call) private callRepository: typeof Call,){
 
   }
+
   async createCall(dto: CreateCallDto){
     try{
       const call = await this.callRepository.create(dto);
@@ -17,6 +18,7 @@ export class CallsService {
       throw new HttpException('Произошла ошибка при добавлении звонка', HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
+
   async takeCalls(){
     const calls = await this.callRepository.findAll()
     return calls;

@@ -18,20 +18,24 @@ export class DishesService {
       const fileName = await this.fileService.createFile(imageRef);
       const uploadedUrl = await this.imagesService.uploadImage(fileName)
       const dish = await this.dishRepository.create({ ...dto, imageRef: uploadedUrl });
+
       return dish;
     } else {
       const dish = await this.dishRepository.create(dto);
+
       return dish;
     }
   }
 
   async getAllDishes() {
     const allDishes = await this.dishRepository.findAll();
+
     return allDishes;
   }
 
   async getDishById(categoryId: number) {
     const dishes = await this.dishRepository.findAll({where: {categoryId}});
+
     return dishes;
   }
 
@@ -41,6 +45,7 @@ export class DishesService {
       where:{id:id},
     });
     await this.dishRepository.destroy({where:{id}});
+
     return dishToDelete.id;
   }
 
@@ -51,11 +56,19 @@ export class DishesService {
       const [updateDish] = await this.dishRepository.update({ ...dishDto, imageRef: uploadedUrl }, {
         where: { id, }
       })
+
       return updateDish
     } else {
-      const [updateDish] = await this.dishRepository.update(dishDto, {
-        where: { id, }
-      })
+      const [updateDish] = await this.dishRepository.update({
+        name: dishDto.name,
+        weight: dishDto.weight,
+        description: dishDto.description,
+        price: dishDto.price,
+        categoryId: dishDto.categoryId
+      }, {
+        where: { id }
+      });
+
       return updateDish
     }
   }
