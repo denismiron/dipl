@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 
 import { SequelizeModule } from "@nestjs/sequelize";
 import { Categories } from "../categories/categories.model";
-
+import {CallsService} from "./calls.service";
 import { CallsController } from "./calls.controller";
 
 @Module({
   controllers: [CallsController],
-  providers: [CallsController],
+  providers: [CallsService],
   imports: [
     SequelizeModule.forFeature([Categories]),
   ]
