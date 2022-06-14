@@ -43,9 +43,9 @@ export class DishesController {
 
   @ApiOperation({summary:"Получение Всех блюд"})
   @ApiResponse({status:200, type: [Dish]})
-  @Get('/viewAll')
-  getAll(){
-    return this.dishesService.getALlDishes();
+  @Get()
+  getAll() {
+    return this.dishesService.getAllDishes();
   }
 
   @ApiOperation({summary:"Удаление блюда"})

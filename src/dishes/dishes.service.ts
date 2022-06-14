@@ -25,9 +25,9 @@ export class DishesService {
     }
   }
 
-  async getALlDishes(){
-    const dish = await this.dishRepository.findAll()
-    return dish
+  async getAllDishes() {
+    const allDishes = await this.dishRepository.findAll();
+    return allDishes;
   }
 
   async getDishById(categoryId: number) {

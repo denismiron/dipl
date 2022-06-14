@@ -5,8 +5,8 @@ import {CallsService} from "./calls.service";
 import {CreateCallDto} from "./dto/creare-call.dto";
 
 
-@ApiTags('Заказы(корзина)')
-@Controller('calls')
+@ApiTags("Заказы(корзина)")
+@Controller("calls")
 export class CallsController {
   constructor(private callsService:CallsService) {
   }
