@@ -17,6 +17,9 @@ export class CallsService {
       throw new HttpException('Произошла ошибка при добавлении звонка', HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
-
+  async takeCalls(){
+    const calls = await this.callRepository.findAll();
+    return calls;
+  }
 
 }
