@@ -18,11 +18,7 @@ export class CallsService {
     }
   }
   async takeCalls(){
-    const calls = await this.callRepository.findOne(
-    {where:{id:1}}
-    );
-    calls.menu.push("3")
+    const calls = await this.callRepository.findAll()
     return calls;
-
   }
 }
