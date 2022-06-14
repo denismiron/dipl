@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { FilesService } from "../files/files.service";
+require('dotenv').config()
 
 const cloudinary = require('cloudinary').v2;
 cloudinary.config({

@@ -41,6 +41,13 @@ export class DishesController {
       return this.dishesService.getDishById(categoryId);
   }
 
+  @ApiOperation({summary:"Получение Всех блюд"})
+  @ApiResponse({status:200, type: [Dish]})
+  @Get('/viewAll')
+  getAll(){
+    return this.dishesService.getALlDishes();
+  }
+
   @ApiOperation({summary:"Удаление блюда"})
   @ApiResponse({status:200})
   @Roles("ADMIN")

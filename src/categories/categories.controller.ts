@@ -12,6 +12,7 @@ export class CategoriesController {
   }
   @ApiOperation({summary:"Получение всех категорий"})
   @ApiResponse({status:200, type: [Categories]})
+
   @Get()
   getAll() {
     return this.categoriesService.getAllCategories();
@@ -19,6 +20,7 @@ export class CategoriesController {
 
   @ApiOperation({summary:"Добавлении категории"})
   @ApiResponse({status:200, type: Categories})
+
   @Post()
   @UseInterceptors(FileInterceptor('imageRef'))
   create(@Body() categoryDto: CreateCategoriesDto,
