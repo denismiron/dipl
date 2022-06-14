@@ -8,7 +8,7 @@ import {CallsService} from "./calls.service";
 export class CallsController {
   constructor(private callsService:CallsService) {
   }
-  @Post()
+  @Post("/order")
   create(@Body() dto ){
     return this.callsService.createCall(dto)
   }
