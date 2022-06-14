@@ -6,7 +6,7 @@ import { Dish } from "../dishes/diches.model";
 interface CallCreationAttrs{
   name: string;
   phone: string;
-  menu: [Dish];
+  menu: Array<Dish>;
 }
 
 
@@ -26,6 +26,6 @@ export class Call extends Model<Call, CallCreationAttrs> {
 
   @ApiProperty({ example: 'Ну там блюда какие-то наверное'})
   @Column({ type: DataType.STRING, allowNull: false })
-  menu: [Dish];
+  menu: Array<Dish>;
 
 }
