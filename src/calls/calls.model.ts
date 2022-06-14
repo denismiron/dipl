@@ -25,7 +25,7 @@ export class Call extends Model<Call, CallCreationAttrs> {
   phone: string;
 
   @ApiProperty({ example: 'Ну там блюда какие-то наверное'})
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.ARRAY, allowNull: false })
   menu: Array<Dish>;
 
 }
