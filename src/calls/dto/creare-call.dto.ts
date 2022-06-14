@@ -9,5 +9,5 @@ export class CreateCallDto{
   readonly phone: string;
 
   @ApiProperty({ example: 'Ну там блюда какие-то наверное'})
-  readonly menu: Dish;
+  readonly menu: string;
 }
