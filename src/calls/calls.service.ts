@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import { Dish } from "../dishes/diches.model";
 import { Call } from "./calls.model";
+import {CreateCallDto} from "./dto/creare-call.dto"
 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class CallsService {
   constructor(@InjectModel(Call) private callRepository: typeof Call,){
 
   }
-  async createCall(dto){
+  async createCall(dto: CreateCallDto){
     try{
       const call = await this.callRepository.create(dto);
       return call;
