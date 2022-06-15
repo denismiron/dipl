@@ -20,6 +20,7 @@ import { ImagesModule } from './images/images.module';
 import { RolesModule } from './roles/roles.module';
 import { UsersModule } from './users/users.module';
 import { CallsModule } from "./calls/calls.module";
+import { MailsModule } from './mails/mails.module';
 import * as path from "path";
 const cloudinary = require('cloudinary').v2;
 
@@ -60,7 +61,8 @@ const cloudinary = require('cloudinary').v2;
     ImagesModule,
     RolesModule,
     UsersModule,
-    CallsModule
+    CallsModule,
+    MailsModule
   ]
 })
 export class AppModule {
