@@ -3,54 +3,76 @@ import { InjectModel } from "@nestjs/sequelize";
 import { Dish } from "./diches.model";
 import { CreateDishDto } from "./dto/create-dish.dto";
 import { FilesService } from "../files/files.service";
+import { ImagesService } from "../images/images.service";
 
 
 @Injectable()
 export class DishesService {
   constructor(@InjectModel(Dish) private dishRepository: typeof Dish,
-              private fileService: FilesService) {
+              private fileService: FilesService,
+              private imagesService: ImagesService) {
   }
 
   async createDish(dto: CreateDishDto, imageRef: any) {
-    const fileName = await this.fileService.createFile(imageRef)
-    const dish = await this.dishRepository.create({...dto, imageRef: fileName});
-    return dish;
+    if (imageRef) {
+      const fileName = await this.fileService.createFile(imageRef);
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const dish = await this.dishRepository.create({ ...dto, imageRef: uploadedUrl });
+
+      return dish;
+    } else {
+      const dish = await this.dishRepository.create(dto);
+
+      return dish;
+    }
+  }
+
+  async getAllDishes() {
+    const allDishes = await this.dishRepository.findAll();
+
+    return allDishes;
   }
 
   async getDishById(categoryId: number) {
     const dishes = await this.dishRepository.findAll({where: {categoryId}});
+
     return dishes;
   }
+
   async deleteOneDish(id:number){
     await this.checkIsExist(id);
     const dishToDelete = await this.dishRepository.findOne({
       where:{id:id},
     });
     await this.dishRepository.destroy({where:{id}});
+
     return dishToDelete.id;
   }
-  // async updateOneDish(id:number, imageRef: any, updateDto: CreateDishDto){
-  //   await this.checkIsExist(id);
-  //   const dishToUpdate = await this.dishRepository.findOne({
-  //     where:{id:id},
-  //   });
-  //   if (updateDto.name)
-  //     dishToUpdate.name = updateDto.name;
-  //   if (updateDto.price)
-  //     dishToUpdate.price = updateDto.price;
-  //   if (updateDto.weight)
-  //     dishToUpdate.weight = updateDto.weight;
-  //   if (updateDto.description)
-  //     dishToUpdate.description = updateDto.description;
-  //   if (updateDto.categoryId)
-  //     dishToUpdate.categoryId = updateDto.categoryId;
-  //   if (imageRef) {
-  //     const imageFileName: string = await this.fileService.createFile(imageRef);
-  //     dishToUpdate.imageRef = imageFileName;
-  //   }
-  //   // @ts-ignore
-  //   return await this.dishRepository.save(dishToUpdate);
-  // }
+
+  async updateOneDish(id: number, dishDto: CreateDishDto, imageRef: any) {
+    if (imageRef) {
+      const fileName = await this.fileService.createFile(imageRef)
+      const uploadedUrl = await this.imagesService.uploadImage(fileName)
+      const [updateDish] = await this.dishRepository.update({ ...dishDto, imageRef: uploadedUrl }, {
+        where: { id, }
+      })
+
+      return updateDish
+    } else {
+      const [updateDish] = await this.dishRepository.update({
+        name: dishDto.name,
+        weight: dishDto.weight,
+        description: dishDto.description,
+        price: dishDto.price,
+        categoryId: dishDto.categoryId
+      }, {
+        where: { id }
+      });
+
+      return updateDish
+    }
+  }
+
 
   private async checkIsExist(id:number){
     const dish = await this.dishRepository.findOne({

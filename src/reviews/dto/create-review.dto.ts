@@ -1,8 +1,14 @@
+import { ApiProperty } from "@nestjs/swagger";
+
 export class CreateReviewDto {
+  @ApiProperty({example:'+22234564234', description:'номер телефона'})
   readonly phone: string;
+  @ApiProperty({example:'Всё было здорово!', description:'Сообщение пользователя'})
   readonly message: string;
-  readonly adminMessage: string;
+  @ApiProperty({example:'Гоша', description:'Имя пользователя'})
   readonly name: string;
+}
+
   // прошивание в твердой обложке,
   // костя я тебя люблю рижик
   // приложение должен чел увидеть какой-то и записку за 2 недели до 21ого числа.
@@ -36,4 +42,4 @@ export class CreateReviewDto {
   // никаких мы,нами, я, вы и вообще местоимений нахуй это всё. А сделано иследовано и т д, не вы можете увидеть а продемонстрировано и т д
   // приложение а б в , внутри а1 б1 в1 или приложение a b c d e f ыххы:)
   //
-}
+

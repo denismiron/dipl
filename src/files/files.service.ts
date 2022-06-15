@@ -18,4 +18,18 @@ export class FilesService {
       throw new HttpException('Произошла ошибка', HttpStatus.INTERNAL_SERVER_ERROR)
     }
   }
+
+  async deleteFile(fileName){
+    try{
+      fs.unlink(`/app/dist/static/${fileName}`, function(err){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Файл удалён");
+        }
+      });
+    }catch (e){
+      throw new HttpException('Произошла ошибка', HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+  }
 }
